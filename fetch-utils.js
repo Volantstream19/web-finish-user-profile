@@ -31,11 +31,14 @@ export async function signOutUser() {
 
 export async function updateProfile(profile) {
     // > Part A: upsert into profiles table
-    return await client.from('profiles').upsert(profile).single();
+    const response = await client.from('profiles').upsert(profile).single();
+    return response;
 }
 
 export async function getProfile(id) {
     // > Part B: get profile by id, maybe single row returned
+    const response = await client.from('profiles').select().match({ id }).maybeSingle();
+    return response;
 }
 
 export async function getProfiles() {
